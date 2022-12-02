@@ -1,0 +1,41 @@
+{
+  "name": "@kare/eslint-config-typescript",
+  "version": "0.0.1-beta.0",
+  "description": "Shared ESLint configuration for Kare's Typescript projects.",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "eslint .eslintrc.js"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.45.0",
+    "@typescript-eslint/parser": "5.45.0",
+    "eslint": "8.28.0",
+    "eslint-plugin-promise": "6.1.1",
+    "typescript": "4.9.3"
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": ">= 5.45.0",
+    "@typescript-eslint/parser": ">= 5.45.0",
+    "eslint": ">= 8.28.0",
+    "eslint-plugin-promise": ">= 6.1.1"
+  },
+  "engines": {
+    "node": "^16 || ^18"
+  },
+  "keywords": [
+    "eslint",
+    "typescript"
+  ],
+  "author": "Kare Nuorteva <kare.nuorteva@me.com> (https://karenuorteva.fi/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kare/eslint-config-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kare/eslint-config-typescript/issues"
+  },
+  "homepage": "https://github.com/kare/eslint-config-typescript#readme"
+}
