@@ -3,6 +3,9 @@
   "version": "0.0.1-beta.1",
   "description": "Shared ESLint configuration for Kare's Typescript projects.",
   "main": ".eslintrc.js",
+  "files": [
+    ".eslintrc.js"
+  ],
   "scripts": {
     "test": "eslint .eslintrc.js"
   },
