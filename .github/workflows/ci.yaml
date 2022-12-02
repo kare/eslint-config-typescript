@@ -1,0 +1,52 @@
+---
+name: CI
+defaults:
+  run:
+    shell: bash
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  repo-lint:
+    name: Repository Lint
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: ibiqlik/action-yamllint@v3.1.1
+        with:
+          file_or_dir: .
+          strict: true
+          no_warnings: false
+          config_file: .yamllint
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@1.1.0
+        env:
+          SHELLCHECK_OPTS: -s bash
+        with:
+          format: tty
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+          - 16
+          - 18
+    name: Node.js v${{ matrix.node }}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version: ${{ matrix.node }}
+          architecture: x64
+      - name: Install Node modules
+        run: npm ci
+      - name: Run tests
+        run: npm test

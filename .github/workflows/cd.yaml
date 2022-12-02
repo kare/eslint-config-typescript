@@ -1,0 +1,45 @@
+#
+# https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+#
+---
+name: CD
+defaults:
+  run:
+    shell: bash
+concurrency:
+  group: npmjs.com
+  cancel-in-progress: true
+on:
+  release:
+    types:
+      - released
+  workflow_dispatch:
+jobs:
+  test:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version-file: .nvmrc
+      - run: npm ci
+      - run: npm test
+  publish-npm:
+    name: Publish npm package
+    environment:
+      name: npmjs.com
+      url: https://npmjs.com/@kare/eslint-config-typescript
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
