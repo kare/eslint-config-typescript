@@ -1,6 +1,6 @@
 {
   "name": "@kare/eslint-config-typescript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Shared ESLint configuration for Kare's Typescript projects.",
   "main": ".eslintrc.js",
   "files": [
